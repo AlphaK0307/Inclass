@@ -1,7 +1,7 @@
 # from re import template
 from crypt import methods
 from app import app
-from flask import redirect, render_template, url_for
+from flask import redirect, render_template, url_for, flash
 from app.forms import SignUpForm, RegisterePhoneForm
 from app.models import User, Post, Phone
 
@@ -23,6 +23,8 @@ def signup():
         password=form.password.data
         # create new user instance
         new_user=User(email=email,username=username, password=password)
+        #flash message
+        flash(f"{new_user.username} has been successfully Signed Up!")
         return redirect(url_for('index'))
     return render_template('signup.html', title=title, form=form)
 
