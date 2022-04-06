@@ -21,6 +21,12 @@ def signup():
         email=form.email.data
         username=form.username.data
         password=form.password.data
+        #Create if there is a user with email or username
+        users_with_that_info = User.query.filter((User.username==username)|(User.email==email)).all()
+        if users_with_that_info:
+            flash(f"Username and/or Email already exist. Please try again", "danger")
+            return render_template('signup.html', title=title, form=form)
+
         # create new user instance
         new_user=User(email=email,username=username, password=password)
         #flash message
