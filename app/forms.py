@@ -18,3 +18,9 @@ class RegisterePhoneForm(FlaskForm):
     phone_number= StringField('Phone Number', validators=[DataRequired()])
     city= StringField('City', validators=[DataRequired()])
     submit= SubmitField('Register')
+
+
+class LoginForm(FlaskForm):
+    username= StringField('Username', validators=[DataRequired()])
+    password= PasswordField('Password', validators=[DataRequired()])
+    submit= SubmitField('Log In')

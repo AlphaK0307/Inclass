@@ -2,7 +2,7 @@
 from crypt import methods
 from app import app
 from flask import redirect, render_template, url_for, flash
-from app.forms import SignUpForm, RegisterePhoneForm
+from app.forms import SignUpForm, RegisterePhoneForm, LoginForm
 from app.models import User, Post, Phone
 
 @app.route('/')
@@ -35,10 +35,13 @@ def signup():
     return render_template('signup.html', title=title, form=form)
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     title= 'Login In'
-    return render_template('login.html', title=title)
+    form=  LoginForm()
+    if form.validate_on_submit():
+        print('This Works')
+    return render_template('login.html', title=title, form=form)
 
 
 @app.route('/register-phone', methods=['GET', 'POST'])
