@@ -24,7 +24,7 @@ def signup():
         # create new user instance
         new_user=User(email=email,username=username, password=password)
         #flash message
-        flash(f"{new_user.username} has been successfully Signed Up!")
+        flash(f"{new_user.username} has been successfully Signed Up!", "success")
         return redirect(url_for('index'))
     return render_template('signup.html', title=title, form=form)
 
