@@ -2,7 +2,7 @@
 from crypt import methods
 from app import app
 from flask import redirect, render_template, url_for, flash
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required
 from app.forms import SignUpForm, RegisterePhoneForm, LoginForm
 from app.models import User, Post, Phone
 
@@ -76,6 +76,7 @@ def logout():
     return redirect(url_for('index'))
 
 @app.route('/create-phone', methods=['GET', 'POST'])
+@login_required
 def create_phone():
     title = 'Register Phonenumber'
     return render_template('create_phone.html', title=title)
