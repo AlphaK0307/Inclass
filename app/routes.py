@@ -2,15 +2,15 @@
 from crypt import methods
 from app import app
 from flask import redirect, render_template, url_for, flash
+from flask_login import login_user
 from app.forms import SignUpForm, RegisterePhoneForm, LoginForm
 from app.models import User, Post, Phone
 
 @app.route('/')
 def index():
     title='Home'
-    user= {'id': 1, 'username':'Patel', 'email':'keyurpatel1121@gmail.com'}
     posts = Post.query.all()
-    return render_template('index.html', current_user=user, title=title, posts=posts)
+    return render_template('index.html', title=title, posts=posts)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -46,6 +46,8 @@ def login():
         user= User.query.filter_by(username=username).first()
         # Check if not user with that username and make sure pass is correct
         if user and user.check_password(password):
+            # log the user in with flasak login
+            login_user(user)
             flash(f'{user} has successfully logged in', 'success')
             return redirect(url_for('index'))
         else:
