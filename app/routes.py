@@ -40,7 +40,8 @@ def login():
     title= 'Login In'
     form=  LoginForm()
     if form.validate_on_submit():
-        print('This Works')
+        username = form.username.data
+        password = form.password.data
     return render_template('login.html', title=title, form=form)
 
 
