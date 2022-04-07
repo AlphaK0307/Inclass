@@ -42,6 +42,14 @@ def login():
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
+        # Check user with that username
+        user= User.query.filter_by(username=username).first()
+        # Check if not user with that username and make sure pass is correct
+        if user and user.check_password(password):
+            flash(f'{user} has successfully logged in', 'success')
+            return redirect(url_for('index'))
+        else:
+            flash(f'Username and/or password is incorrect', 'danger')
     return render_template('login.html', title=title, form=form)
 
 
