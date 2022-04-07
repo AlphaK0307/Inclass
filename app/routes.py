@@ -2,7 +2,7 @@
 from crypt import methods
 from app import app
 from flask import redirect, render_template, url_for, flash
-from flask_login import login_user
+from flask_login import login_user, logout_user
 from app.forms import SignUpForm, RegisterePhoneForm, LoginForm
 from app.models import User, Post, Phone
 
@@ -67,3 +67,10 @@ def register_phone():
         Phone(first_name=first_name, last_name=last_name, phone_number=phone_number, city=city)
         return redirect(url_for('index'))
     return render_template('register_phone.html', title=title, form=form, phones=phones)
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    flash(f'You have logged out', 'primary')
+    return redirect(url_for('index'))
