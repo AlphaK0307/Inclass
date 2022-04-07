@@ -74,3 +74,8 @@ def logout():
     logout_user()
     flash(f'You have logged out', 'primary')
     return redirect(url_for('index'))
+
+@app.route('/create-phone', methods=['GET', 'POST'])
+def create_phone():
+    title = 'Register Phonenumber'
+    return render_template('create_phone.html', title=title)
